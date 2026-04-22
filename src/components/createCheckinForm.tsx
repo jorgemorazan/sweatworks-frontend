@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { cancelMembership, getActiveMembers } from "../api/api";
+import { createCheckIn, getActiveMembers } from "../api/api";
 
-export function CancelMembershipForm({ onClose }: { onClose: () => void }) {
+export function CreateCheckInForm({ onClose }: { onClose: () => void }) {
   const activeMembers = useQuery({
     queryKey: ["activeMembers"],
     queryFn: () => getActiveMembers(),
@@ -13,14 +13,14 @@ export function CancelMembershipForm({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     if (activeMembers.data?.length) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSelectActiveMember(activeMembers.data[0].memberships[0].id);
+      setSelectActiveMember(activeMembers.data[0].id);
     }
   }, [activeMembers.data]);
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (id: string) => cancelMembership(id),
+    mutationFn: (id: string) => createCheckIn(id),
     onSuccess: () => {
-      alert("Membership canceled!");
+      alert("Check-in created!");
       onClose();
     },
   });
@@ -42,10 +42,7 @@ export function CancelMembershipForm({ onClose }: { onClose: () => void }) {
             onChange={(e) => setSelectActiveMember(e.target.value)}
           >
             {activeMembers.data?.map((activeMember) => (
-              <option
-                key={activeMember.id}
-                value={activeMember.memberships[0].id}
-              >
+              <option key={activeMember.id} value={activeMember.id}>
                 {activeMember.name} - {activeMember.email}
               </option>
             ))}

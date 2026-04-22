@@ -38,11 +38,15 @@ export async function createMembership(body) {
 
 export async function getActiveMembers() {
   const response = await axios.get(`${BASE_URL}/memberships/active/members`);
-  console.log(response);
   return response.data;
 }
 
 export async function cancelMembership(id: string) {
   const response = await axios.patch(`${BASE_URL}/memberships/${id}/cancel`);
+  return response.data;
+}
+
+export async function createCheckIn(id: string) {
+  const response = await axios.post(`${BASE_URL}/checkins/members/${id}`);
   return response.data;
 }

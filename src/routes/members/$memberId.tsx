@@ -41,7 +41,9 @@ function RouteComponent() {
           </div>
           <div className="flex">
             <p className="font-bold">Last Check-in:</p>
-            <p className="ml-2">{data.lastCheckIn ?? "--"}</p>
+            <p className="ml-2">
+              {data.lastCheckIn ? data.lastCheckIn.createdAt : "--"}
+            </p>
           </div>
           <div className="flex">
             <p className="font-bold">Check-in Count in the Last 30 Days:</p>
