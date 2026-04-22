@@ -12,6 +12,7 @@ export function CreateMemberForm({ onClose }: { onClose: () => void }) {
     mutationFn: (body: { name: string; email: string }) => createMember(body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["members"] });
+      alert("Member created!");
       onClose();
     },
   });
