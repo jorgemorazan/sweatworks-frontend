@@ -22,7 +22,9 @@ function RootComponent() {
         </Link>
       </div>
       <hr />
-      <Outlet />
+      <div className="p-5">
+        <Outlet />
+      </div>
     </>
   );
 }
