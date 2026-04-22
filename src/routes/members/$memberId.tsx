@@ -32,6 +32,14 @@ function RouteComponent() {
             <p className="ml-2">{data.member.email}</p>
           </div>
           <div className="flex">
+            <p className="font-bold">Active Membership:</p>
+            <p className="ml-2">
+              {data.activeMembership
+                ? `${data.activeMembership.startDate} - ${data.activeMembership.plan.name}`
+                : "--"}
+            </p>
+          </div>
+          <div className="flex">
             <p className="font-bold">Last Check-in:</p>
             <p className="ml-2">{data.lastCheckIn ?? "--"}</p>
           </div>
